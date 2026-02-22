@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Vendor Evaluation System</title>
+    <meta name="description" content="AI-powered multi-agent vendor evaluation and comparison system for industrial procurement">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Main Layout -->
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">VendorAI</span>
+                    <span class="logo-subtitle">Evaluation System</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-view="dashboard" onclick="showView('dashboard')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-btn" data-view="progress" onclick="showView('progress')" id="nav-progress">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <span>Live Pipeline</span>
+                </button>
+                <button class="nav-btn" data-view="results" onclick="showView('results')" id="nav-results">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+                    <span>Results</span>
+                </button>
+                <button class="nav-btn" data-view="review" onclick="showView('review')" id="nav-review">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <span>Manager Review</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="status-indicator" id="system-status">
+                    <div class="status-dot"></div>
+                    <span>System Ready</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- ═══════════════ DASHBOARD VIEW ═══════════════ -->
+            <section class="view active" id="view-dashboard">
+                <div class="view-header">
+                    <div>
+                        <h1 class="view-title">Vendor Evaluation Dashboard</h1>
+                        <p class="view-subtitle">AI-powered multi-agent procurement analysis</p>
+                    </div>
+                </div>
+
+                <!-- Hero Card -->
+                <div class="hero-card">
+                    <div class="hero-content">
+                        <div class="hero-badge">AGENTIC AI</div>
+                        <h2>Multi-Agent Vendor Evaluation</h2>
+                        <p>Deploy 5 specialized AI agents to automatically evaluate vendor proposals against your company requirements. Get instant technical assessments, compliance checks, market price validation, and ranked recommendations.</p>
+                        <div class="hero-agents">
+                            <div class="agent-chip"><span class="chip-dot" style="background:#3b82f6"></span>Librarian</div>
+                            <div class="agent-chip"><span class="chip-dot" style="background:#8b5cf6"></span>Engineer</div>
+                            <div class="agent-chip"><span class="chip-dot" style="background:#06b6d4"></span>Compliance</div>
+                            <div class="agent-chip"><span class="chip-dot" style="background:#f59e0b"></span>Scorer</div>
+                            <div class="agent-chip"><span class="chip-dot" style="background:#22c55e"></span>Reporter</div>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="orbit-ring orbit-ring-1"><div class="orbit-dot"></div></div>
+                        <div class="orbit-ring orbit-ring-2"><div class="orbit-dot"></div></div>
+                        <div class="orbit-ring orbit-ring-3"><div class="orbit-dot"></div></div>
+                        <div class="orbit-center">AI</div>
+                    </div>
+                </div>
+
+                <!-- System Info Cards -->
+                <div class="info-grid" id="system-info-grid">
+                    <div class="info-card">
+                        <div class="info-icon" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="info-label">Requirements</div>
+                        <div class="info-value" id="info-requirements">Loading...</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon" style="background: linear-gradient(135deg, #06b6d4, #3b82f6)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="info-label">Vendor Proposals</div>
+                        <div class="info-value" id="info-vendors">Loading...</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div class="info-label">AI Model</div>
+                        <div class="info-value">Gemini 2.5 Flash</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon" style="background: linear-gradient(135deg, #22c55e, #06b6d4)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="info-label">RAG Memory</div>
+                        <div class="info-value">ChromaDB Active</div>
+                    </div>
+                </div>
+
+                <!-- Vendor List -->
+                <div class="card" id="vendor-list-card">
+                    <div class="card-header">
+                        <h3>Discovered Vendor Proposals</h3>
+                    </div>
+                    <div class="card-body" id="vendor-list-body">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-lg" id="start-eval-btn" onclick="startEvaluation()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            Start AI Evaluation
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════ PROGRESS VIEW ═══════════════ -->
+            <section class="view" id="view-progress">
+                <div class="view-header">
+                    <div>
+                        <h1 class="view-title">Live Pipeline</h1>
+                        <p class="view-subtitle" id="progress-subtitle">Waiting to start...</p>
+                    </div>
+                    <div class="progress-indicator" id="progress-indicator">
+                        <div class="progress-ring">
+                            <svg viewBox="0 0 60 60">
+                                <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                                <circle cx="30" cy="30" r="26" fill="none" stroke="url(#progressGradient)" stroke-width="4"
+                                        stroke-dasharray="163.36" stroke-dashoffset="163.36" stroke-linecap="round"
+                                        id="progress-circle"/>
+                                <defs>
+                                    <linearGradient id="progressGradient">
+                                        <stop offset="0%" stop-color="#3b82f6"/>
+                                        <stop offset="100%" stop-color="#8b5cf6"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span class="progress-pct" id="progress-pct">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pipeline Steps -->
+                <div class="pipeline-steps" id="pipeline-steps">
+                    <div class="pipeline-step" id="step-requirements">
+                        <div class="step-icon step-pending">1</div>
+                        <div class="step-info">
+                            <div class="step-name">Parse Requirements</div>
+                            <div class="step-desc">AI Librarian extracts structured requirements</div>
+                        </div>
+                    </div>
+                    <div class="pipeline-step" id="step-vendors">
+                        <div class="step-icon step-pending">2</div>
+                        <div class="step-info">
+                            <div class="step-name">Evaluate Vendors</div>
+                            <div class="step-desc" id="step-vendors-desc">Parse, audit, and score each vendor</div>
+                        </div>
+                    </div>
+                    <div class="pipeline-step" id="step-ranking">
+                        <div class="step-icon step-pending">3</div>
+                        <div class="step-info">
+                            <div class="step-name">Generate Rankings</div>
+                            <div class="step-desc">Compare and rank all vendors</div>
+                        </div>
+                    </div>
+                    <div class="pipeline-step" id="step-review">
+                        <div class="step-icon step-pending">4</div>
+                        <div class="step-info">
+                            <div class="step-name">Manager Review</div>
+                            <div class="step-desc">Human-in-the-loop approval</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Log -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Agent Activity Log</h3>
+                        <div class="live-badge" id="live-badge">
+                            <span class="live-dot"></span>LIVE
+                        </div>
+                    </div>
+                    <div class="log-container" id="log-container">
+                        <div class="log-empty">Waiting for pipeline to start...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════ RESULTS VIEW ═══════════════ -->
+            <section class="view" id="view-results">
+                <div class="view-header">
+                    <div>
+                        <h1 class="view-title">Evaluation Results</h1>
+                        <p class="view-subtitle">Vendor comparison and rankings</p>
+                    </div>
+                </div>
+
+                <!-- Rankings -->
+                <div id="results-content">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
+                            <path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>
+                        </svg>
+                        <h3>No Results Yet</h3>
+                        <p>Start an evaluation to see vendor rankings here.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════ REVIEW VIEW ═══════════════ -->
+            <section class="view" id="view-review">
+                <div class="view-header">
+                    <div>
+                        <h1 class="view-title">Manager Review</h1>
+                        <p class="view-subtitle">Approve or request re-evaluation with feedback</p>
+                    </div>
+                </div>
+
+                <div id="review-content">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                        </svg>
+                        <h3>Awaiting Evaluation</h3>
+                        <p>Complete an evaluation to review results.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

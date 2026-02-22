@@ -1,0 +1,42 @@
+# ─────────────────────────────────────────────────────────
+#  Docker Compose — Agentic Vendor Evaluation System
+# ─────────────────────────────────────────────────────────
+#  Run:  docker compose up --build
+#  Open: http://localhost:3001
+# ─────────────────────────────────────────────────────────
+
+services:
+  # ── FastAPI Backend ─────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    container_name: agentic-backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount data directories so uploads persist on host
+      - ./vendor_proposals:/app/vendor_proposals
+      - ./memory:/app/memory
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/system/info')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── React Frontend (Nginx) ─────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    container_name: agentic-frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

@@ -1,0 +1,22 @@
+# Orchestration
+langgraph
+langchain
+langchain-core
+
+# LLMs
+langchain-google-genai
+
+# Vector Database (RAG Memory)
+chromadb
+langchain-chroma
+
+# Text Splitting (for PDF chunking into ChromaDB)
+langchain-text-splitters
+langchain-community
+
+# PDF Processing
+PyMuPDF
+
+# Environment & Utilities
+python-dotenv
+certifi

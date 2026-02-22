@@ -1,0 +1,46 @@
+# Dependencies
+frontend/node_modules
+node_modules
+
+# Build outputs
+frontend/dist
+
+# Python caches
+__pycache__
+agents/__pycache__
+tools/__pycache__
+*.pyc
+*.pyo
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Docker
+docker-compose.yml
+*.Dockerfile
+.dockerignore
+
+# Firebase
+.firebaserc
+firebase.json
+firestore.rules
+firestore.indexes.json
+
+# Docs
+documentation/
+README.md
+
+# Test files
+test_*.py
+generate_test_data.py
+
+# OS
+.DS_Store
+Thumbs.db
